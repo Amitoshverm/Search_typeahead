@@ -3,12 +3,10 @@ package com.bookmarks.TypeAhead.entity;
 import java.util.Collection;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,8 +27,6 @@ public class Users implements UserDetails {
         this.displayName = displayName;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Sites> sites;
 
     public String getUsername() {
         return email;
@@ -86,11 +82,4 @@ public class Users implements UserDetails {
         this.email = email;
     }
 
-    public List<Sites> getSites() {
-        return sites;
-    }
-
-    public void setSites(List<Sites> sites) {
-        this.sites = sites;
-    }
 }

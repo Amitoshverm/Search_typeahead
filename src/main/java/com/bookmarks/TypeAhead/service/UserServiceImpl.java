@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
                 orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
 
         UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setUsername(user.getUsername());
+        userResponseDto.setDisplayName(user.getUsername());
         userResponseDto.setEmail(user.getEmail());
 
         return userResponseDto;
@@ -35,18 +35,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto createUser(CreateUserDto createUserDto) {
-        Users user = new Users();
-        user.setUsername(createUserDto.getUsername());
-        user.setEmail(createUserDto.getEmail());
-        user.setPassword(createUserDto.getPassword());
-
-        Users savedUser = this.userRepository.save(user);
-
-        UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setUsername(savedUser.getUsername());
-        userResponseDto.setEmail(savedUser.getEmail());
-
-        return userResponseDto;
+//        Users user = new Users();
+//        user.getDisplayName(createUserDto.getDisplayName());
+//        user.setEmail(createUserDto.getEmail());
+//        user.setPassword(createUserDto.getPassword());
+//
+//        Users savedUser = this.userRepository.save(user);
+//
+//        UserResponseDto userResponseDto = new UserResponseDto();
+//        userResponseDto.setUsername(savedUser.getUsername());
+//        userResponseDto.setEmail(savedUser.getEmail());
+//
+//        return userResponseDto;
+    return null;
     }
 
     @Override
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
         return users.stream().map(user-> {
             UserResponseDto userResponseDto = new UserResponseDto();
-            userResponseDto.setUsername(user.getUsername());
+            userResponseDto.setDisplayName(user.getUsername());
             userResponseDto.setEmail(user.getEmail());
             return userResponseDto;
         }).toList();

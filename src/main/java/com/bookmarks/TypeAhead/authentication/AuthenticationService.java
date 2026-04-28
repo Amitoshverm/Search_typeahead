@@ -37,7 +37,7 @@ public class AuthenticationService {
         String hashedPassword = this.bCryptPasswordEncoder.encode(signUpUserDto.getPassword());
 
         Users userForDb = new Users();
-        userForDb.setUsername(signUpUserDto.getUsername());
+        userForDb.setDisplayName(signUpUserDto.getUsername());
         userForDb.setEmail(signUpUserDto.getEmail());
         userForDb.setPassword(hashedPassword);
         userRepository.save(userForDb);
@@ -45,7 +45,7 @@ public class AuthenticationService {
         String token = this.jwtService.generateToken(userForDb.getEmail());
 
         UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setUsername(userForDb.getUsername());
+        userResponseDto.setDisplayName(userForDb.getDisplayName());
         userResponseDto.setEmail(userForDb.getEmail());
         userResponseDto.setToken(token);
         return userResponseDto;
@@ -66,7 +66,7 @@ public class AuthenticationService {
         String token = this.jwtService.generateToken(userForDb.getEmail());
 
         UserResponseDto userResponseDto = new UserResponseDto();
-        userResponseDto.setUsername(userForDb.getUsername());
+        userResponseDto.setDisplayName(userForDb.getDisplayName());
         userResponseDto.setEmail(userForDb.getEmail());
         userResponseDto.setToken(token);
         return  userResponseDto;

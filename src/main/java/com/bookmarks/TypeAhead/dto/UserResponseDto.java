@@ -2,7 +2,7 @@ package com.bookmarks.TypeAhead.dto;
 
 public class UserResponseDto {
 
-    private String username;
+    private String displayName;
     private String email;
     private String token;
 
@@ -14,12 +14,12 @@ public class UserResponseDto {
         this.token = token;
     }
 
-    public String getUsername() {
-        return username;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getEmail() {

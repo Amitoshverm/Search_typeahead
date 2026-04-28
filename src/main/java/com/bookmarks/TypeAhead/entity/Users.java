@@ -1,5 +1,6 @@
 package com.bookmarks.TypeAhead.entity;
 
+import java.util.Collection;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -8,19 +9,58 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
-public class Users {
+@Entity(name = "users")
+public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    private String username;
+    private String displayName;
     private String password;
     private String email;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Sites> sites;
 
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+       return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
     public Long getId() {
         return id;
     }
@@ -29,13 +69,6 @@ public class Users {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;

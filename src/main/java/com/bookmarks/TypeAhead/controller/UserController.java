@@ -15,8 +15,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private UserService userService;
-    private AuthenticationService authenticationService;
+
+    private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     public UserController(UserService userService,  AuthenticationService authenticationService) {
         this.userService = userService;
@@ -29,34 +30,38 @@ public class UserController {
                 HttpStatus.CREATED);
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public ResponseEntity<UserResponseDto> login(@RequestBody LoginUserDto loginUserDto) {
-        return new ResponseEntity<>(this.authenticationService.signIn(loginUserDto.getEmail(),
-                loginUserDto.getPassword()), HttpStatus.OK);
-    }
-
-    @PostMapping()
-    public ResponseEntity<UserResponseDto> createUserDto(@RequestBody CreateUserDto createUserDto) {
-        return new ResponseEntity<>(this.userService.createUser(createUserDto),
-                HttpStatus.CREATED);
-    }
-
-    @GetMapping()
-    public ResponseEntity<List<UserResponseDto>> getAllUsers() {
-        return new ResponseEntity<>(this.userService.getAllUsers(),
+        return new ResponseEntity<>(
+                this.authenticationService.signIn(
+                        loginUserDto.getEmail(),
+                        loginUserDto.getPassword()),
                 HttpStatus.OK);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<UserResponseDto> getUserById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(this.userService.getUserById(id),
-                HttpStatus.OK);
-    }
+@PostMapping()
+public ResponseEntity<UserResponseDto> createUserDto(@RequestBody CreateUserDto createUserDto) {
+    return new ResponseEntity<>(this.userService.createUser(createUserDto),
+            HttpStatus.CREATED);
+}
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Void> deleteUserById(@PathVariable("id") Long id) {
-        this.userService.deleteUserById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+@GetMapping()
+public ResponseEntity<List<UserResponseDto>> getAllUsers() {
+    return new ResponseEntity<>(this.userService.getAllUsers(),
+            HttpStatus.OK);
+}
+
+@GetMapping("{id}")
+public ResponseEntity<UserResponseDto> getUserById(@PathVariable("id") Long id) {
+    return new ResponseEntity<>(this.userService.getUserById(id),
+            HttpStatus.OK);
+}
+
+@DeleteMapping("{id}")
+public ResponseEntity<Void> deleteUserById(@PathVariable("id") Long id) {
+    this.userService.deleteUserById(id);
+    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+}
 
 }
+

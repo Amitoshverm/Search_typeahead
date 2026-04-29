@@ -1,11 +1,11 @@
 package com.bookmarks.TypeAhead.search;
 
-public class TreeNode {
+public class TrieNode {
     char data;
-    TreeNode[] children = new TreeNode[26];
+    TrieNode[] children = new TrieNode[26];
     int freq;
 
-    public TreeNode(char data) {
+    public TrieNode(char data) {
         this.data = data;
     }
 }

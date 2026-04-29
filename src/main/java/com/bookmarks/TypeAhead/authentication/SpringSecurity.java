@@ -42,7 +42,7 @@ public class SpringSecurity {
         http.sessionManagement(session ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authorizeHttpRequests(auth ->
-                auth.requestMatchers("/user/signup", "/user/login", "/user/signin").permitAll()
+                auth.requestMatchers("/user/signup", "/user/login", "/user/signin", "/search/suggest", "/search/query").permitAll()
                         .anyRequest().authenticated()
         );
         http.authenticationProvider(authenticationProvider());

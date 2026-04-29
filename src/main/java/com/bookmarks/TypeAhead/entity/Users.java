@@ -1,12 +1,10 @@
 package com.bookmarks.TypeAhead.entity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,6 +16,9 @@ public class Users implements UserDetails {
     private String displayName;
     private String password;
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<SearchTerm> searchHistory = new ArrayList<>();
 
     public String getDisplayName() {
         return displayName;
@@ -80,6 +81,12 @@ public class Users implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<SearchTerm> getSearchHistory() { return searchHistory; }
+
+    public void setSearchHistory(List<SearchTerm> searchHistory) {
+        this.searchHistory = searchHistory;
     }
 
 }

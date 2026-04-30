@@ -37,12 +37,12 @@ public class SearchService implements ApplicationListener<ApplicationReadyEvent>
 
     public void loadTrieFromDatabase() {
         List<SearchTerm> allTerms = searchTermRepository.findAll();
-        System.out.println("📦 Terms from DB: " + allTerms.size());
+        System.out.println("Terms from DB: " + allTerms.size());
         for (SearchTerm term : allTerms) {
             System.out.println("Inserting: " + term.getWord() + " freq: " + term.getFrequency());
             trie.insertWithFrequency(term.getWord(), term.getFrequency());
         }
-        System.out.println("✅ Trie loaded with " + allTerms.size() + " terms");
+        System.out.println("Trie loaded with " + allTerms.size() + " terms");
     }
 
 

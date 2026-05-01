@@ -1,4 +1,59 @@
-# Introduction
+# Search Typeahead — Backend
+
+A production-grade search typeahead API built with Spring Boot,
+featuring in-memory Trie data structure, Redis caching, and JWT auth.
+
+## Architecture
+[paste the architecture diagram screenshot here]
+
+## Tech Stack
+- Java 17 + Spring Boot 3
+- Trie (custom implementation) — in-memory prefix search
+- Redis — lazy prefix cache, 5min TTL
+- MySQL — persistent storage
+- JWT — stateless authentication
+
+## How it works
+1. On startup, all words load from MySQL into Trie (RAM)
+2. User types prefix → Redis checked first (< 2ms)
+3. Cache miss → Trie lookup (< 5ms)
+4. Result cached in Redis for next request
+5. On search → frequency updated in MySQL + Trie
+6. Redis cache invalidated for all prefixes of searched word
+
+## Performance
+    | Layer       | Latency  |
+    |-------------|----------|
+    | Redis hit   | ~2ms     |
+    | Trie lookup | ~5ms     |
+    | MySQL query | ~150ms   |
+
+## API Endpoints
+    POST /user/signup     — register user
+    POST /user/login      — returns JWT token
+    GET  /search/suggest  — get top 5 suggestions
+    POST /search/query    — save search + update frequency
+
+## Run locally
+# Prerequisites: Java 17, MySQL, Redis
+
+# 1. Create MySQL database
+mysql -u root -p
+CREATE DATABASE bookmark_app;
+
+# 2. Configure application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/bookmark_app
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+
+# 3. Run
+mvn clean spring-boot:run
+
+
+
+
+
+# For my understandings
 ## this is my project where i will be using all my backend learning to create a project that will be useful for me and others. I will be using node js and express js for the backend and mongodb for the database. I will be creating a REST API that will allow users to create, read, update and delete data from the database.
 ## Database which i will be using is Mysql 
 

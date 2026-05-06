@@ -14,7 +14,9 @@ public class Users implements UserDetails {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
     private String displayName;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

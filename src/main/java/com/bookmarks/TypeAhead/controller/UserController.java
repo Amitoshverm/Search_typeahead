@@ -6,6 +6,7 @@ import com.bookmarks.TypeAhead.dto.LoginUserDto;
 import com.bookmarks.TypeAhead.dto.SignUpUserDto;
 import com.bookmarks.TypeAhead.dto.UserResponseDto;
 import com.bookmarks.TypeAhead.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<UserResponseDto> signup(@RequestBody SignUpUserDto signUpUserDto) throws Exception {
+    public ResponseEntity<UserResponseDto> signup(@Valid @RequestBody SignUpUserDto signUpUserDto) throws Exception {
         return new ResponseEntity<>(this.authenticationService.signUp(signUpUserDto),
                 HttpStatus.CREATED);
     }

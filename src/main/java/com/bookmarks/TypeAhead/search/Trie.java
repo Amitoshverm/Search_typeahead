@@ -15,6 +15,7 @@ public class Trie {
         int l =  word.length();
         for (int i = 0; i < l; i++) {
             int idx = word.charAt(i) - 'a';
+            if (idx < 0 || idx >= 26) return;
             if (current.children[idx] == null) {
                 current.children[idx] = new TrieNode(word.charAt(i));
             }
@@ -27,6 +28,7 @@ public class Trie {
         int l =  word.length();
         for (int i = 0; i < l; i++) {
             int idx = word.charAt(i) - 'a';
+            if (idx < 0 || idx >= 26) return false;
             if (current.children[idx] == null) {
                 return false;
             }
@@ -89,6 +91,7 @@ public class Trie {
         TrieNode current = root;
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i) - 'a';
+            if (index < 0 || index >= 26) return;
             if (current.children[index] == null) {
                 current.children[index] = new TrieNode(word.charAt(i));
             }
@@ -102,6 +105,7 @@ public class Trie {
         TrieNode current = root;
         for (int i = 0; i < word.length(); i++) {
             int index = word.charAt(i) - 'a';
+            if (index < 0 || index >= 26) return;
             if (current.children[index] == null) return; // word doesn't exist
             current = current.children[index];
         }

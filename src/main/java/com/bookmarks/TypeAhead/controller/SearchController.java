@@ -18,15 +18,18 @@ public class SearchController {
     }
 
     @GetMapping("/suggest")
-    public ResponseEntity<List<String>> getSuggestions(
-            @RequestParam String prefix) {
-        List<String> suggestions = searchService.getSuggestions(prefix);
+    public ResponseEntity<List<String>> getSuggestions(@RequestParam String prefix) {
+        String clean = prefix.toLowerCase().replaceAll("[^a-z]", "");
+        if (clean.length() < 2) return ResponseEntity.ok(List.of());
+        List<String> suggestions = searchService.getSuggestions(clean);
         return new ResponseEntity<>(suggestions, HttpStatus.OK);
     }
 
     @PostMapping("/query")
     public ResponseEntity<Void> searchWord(@RequestParam String word) {
-        searchService.searchWord(word);
+        String clean = word.toLowerCase().replaceAll("[^a-z]", "");
+        if (clean.length() < 2) return new ResponseEntity<>(HttpStatus.OK);
+        searchService.searchWord(clean);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

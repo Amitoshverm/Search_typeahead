@@ -73,6 +73,9 @@ public class SearchService implements ApplicationListener<ApplicationReadyEvent>
     public void searchWord(String word) {
         String lowerWord = word.toLowerCase();
 
+        String clean = word.toLowerCase().replaceAll("[^a-z]", "");
+        if (clean.length() < 2) return;
+
         // 1. check if word exists in DB
         Optional<SearchTerm> existing = searchTermRepository.findByWord(lowerWord);
 

@@ -37,7 +37,7 @@ public class AuthenticationService {
         String hashedPassword = this.bCryptPasswordEncoder.encode(signUpUserDto.getPassword());
 
         Users userForDb = new Users();
-        userForDb.setDisplayName(signUpUserDto.getUsername());
+        userForDb.setDisplayName(signUpUserDto.getDisplayName());
         userForDb.setEmail(signUpUserDto.getEmail());
         userForDb.setPassword(hashedPassword);
         userRepository.save(userForDb);

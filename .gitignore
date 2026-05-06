@@ -32,3 +32,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+*.class
+*.jar
+application.properties

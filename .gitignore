@@ -36,4 +36,3 @@ build/
 #target/
 *.class
 *.jar
-application.properties

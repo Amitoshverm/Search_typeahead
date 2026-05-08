@@ -33,7 +33,7 @@ build/
 ### VS Code ###
 .vscode/
 
-
+#target/
 *.class
 *.jar
-application.properties
+application.properties  ← add this

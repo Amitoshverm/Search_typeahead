@@ -4,6 +4,7 @@
   },
   "deploy": {
     "startCommand": "java -jar target/*.jar",
-    "healthcheckPath": "/user/login"
+    "healthcheckPath": "/actuator/health",
+    "healthcheckTimeout": 300
   }
 }
